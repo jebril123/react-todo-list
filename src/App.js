@@ -25,6 +25,12 @@ class App extends Component {
    handleSubmit = (e) => {
       e.preventDefault();
 
+      // const text = this.state.item;
+
+      // if (text === "") {
+
+      // }
+
       const newitem = {
          id: this.state.id,
          title: this.state.item,
@@ -38,22 +44,35 @@ class App extends Component {
             item: '',
             id: uuid(),
             editItem: false,
-         },
-         () => console.log(this.state)
+         }
+         // () => console.log(this.state)
       );
    };
    clearList = () => {
-      console.log('clear list');
+      this.setState({
+         items: [],
+      });
    };
    handleDelete = (id) => {
-      console.log(`handle delete ${id}`);
+      const itemdel = this.state.items.filter((item) => item.id !== id);
+
+      this.setState({
+         items: itemdel,
+      });
    };
    handleEdit = (id) => {
-      console.log(`handle edit ${id}`);
-   };
+      const itemdel = this.state.items.filter((item) => item.id !== id);
+      const selecteditem = this.state.items.find((item) => item.id === id);
 
+      this.setState({
+         items: itemdel,
+         item: selecteditem.title,
+         id: id,
+         editItem: true,
+      });
+   };
    render() {
-      console.log(this.state);
+      // console.log(this.state);
       return (
          <div>
             <div className="container">
